@@ -1,4 +1,17 @@
 <h1>書籍一覧</h1>
 
+<div class="books-container">
+    <% @books.each do |t| %>
+        <div class="book">
+            <strong>タイトル:</strong>
+            <%= t.title %>
+            <br>
+            <strong>登録日時:</strong>
+            <%= t.created_at.to_s(:datetime_jp) %>
+            <br>
+        </div>
+    <% end %>
+</div>
+
 
 <%= link_to '登録', books_new_path %>
