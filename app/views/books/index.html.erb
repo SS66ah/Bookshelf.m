@@ -1,5 +1,7 @@
 <h1>書籍一覧</h1>
 
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+
 <div class="books-container">
     <% @books.each do |t| %>
         <div class="book">
