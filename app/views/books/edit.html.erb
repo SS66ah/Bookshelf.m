@@ -1,0 +1,33 @@
+<h1>登録編集</h1>
+
+
+<%= form_for @book do |f| %>
+    <div class="field">
+        <%= f.label :タイトル %>
+        <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+    <%= f.label :著者 %>
+    <%= f.text_field :author %>
+    </div>
+
+    <div class="field">
+    <%= f.label :出版社 %>
+    <%= f.text_field :publisher%>
+    </div>
+
+    <div class="field">
+    <%= f.label :発行年 %>
+    <%= f.text_field :year%>
+    </div>
+
+    <div class="field">
+    <%= f.label :ISBN %>
+    <%= f.text_field :isbn %>
+    </div>
+
+    <%= f.submit "編集する" %>
+<% end %>
+
+<%= link_to 'Back', books_path %>

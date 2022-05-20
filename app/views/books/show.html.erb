@@ -25,4 +25,6 @@
     <%= @book.isbn %>
 </p>
 
+<%= link_to "編集する", edit_book_path(@book.id) %>
+
 <%= link_to '書籍一覧', books_path%>

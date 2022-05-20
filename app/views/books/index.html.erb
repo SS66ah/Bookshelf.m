@@ -10,6 +10,7 @@
             <%= t.created_at.to_s(:datetime_jp) %>
             <br>
             <%= link_to "詳細", book_path(t.id) %>
+            <%= link_to "編集", edit_book_path(t.id) %>
         </div>
     <% end %>
 </div>
