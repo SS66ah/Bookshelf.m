@@ -12,8 +12,6 @@ class BooksController < ApplicationController
     def create
         book = Book.new(book_params)
 
-        book.user_id = current_user.id
-        
         #bookをデータベースに保存し、saveが成功
         if book.save 
             redirect_to :action => "index" 
@@ -22,5 +20,10 @@ class BooksController < ApplicationController
             redirect_to :action => "new"
         end
     end
+
+    private
+        def book_params
+            params.require(:book).permit(:title, :author, :publisher, :year, :isbn,)
+        end
 
 end
