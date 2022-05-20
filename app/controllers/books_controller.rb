@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+    #ログイン済みかどうかを確認
     before_action :authenticate_user!
 
     def index
@@ -8,6 +9,7 @@ class BooksController < ApplicationController
 
     #新規登録
     def new
+        #newアクション(新規登録)
         @book = Book.new
     end
 
@@ -32,10 +34,11 @@ class BooksController < ApplicationController
 
     #詳細
     def show
+        #@bookに、送られてきたidの登録情報を代入
         @book = Book.find(params[:id])
-
-        @comments = @book.comments
+        #newアクション(コメント)
         @comment = Comment.new
+        @comments = @book.comments
     end
 
     #編集
@@ -46,6 +49,7 @@ class BooksController < ApplicationController
     #削除
     def destroy
         book = Book.find(params[:id])
+        #book変数の中に格納されている登録情報に対応するレコードを削除
         book.destroy
         redirect_to action: :index
     end

@@ -3,7 +3,10 @@ class CommentsController < ApplicationController
 
         def create
             book = Book.find(params[:book_id])
-            comment = book.comments.build(comment_params) #buildを使い、contentとbook_idの二つを同時に代入
+            #buildを使い、contentとbook_idの二つを同時に代入            
+            comment = book.comments.build(comment_params)
+            #user_idカラムにコメントした人のidを格納
+            #取得したコメントのレコードのuser_idカラム＝現在ログインしているuserのid
             comment.user_id = current_user.id
             if comment.save
                 flash[:success] = "コメントしました"
