@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'books/:id' => 'books#show',as: 'book'
 
   patch 'books/:id' => 'books#update'
+  delete 'books/:id' => 'books#destroy' 
   get 'books/:id/edit' => 'books#edit', as:'edit_book'
 
   root 'top#index'

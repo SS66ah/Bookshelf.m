@@ -25,10 +25,17 @@ class BooksController < ApplicationController
     def show
         @book = Book.find(params[:id])
     end
-    
+
     #編集
     def edit
         @book = Book.find(params[:id])
+    end
+
+    #削除
+    def destroy
+        book = Book.find(params[:id])
+        book.destroy
+        redirect_to action: :index
     end
 
     def update
