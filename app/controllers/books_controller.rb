@@ -13,8 +13,14 @@ class BooksController < ApplicationController
 
     #新規登録
     def create
+        #bookレコードに投稿内容を格納
         book = Book.new(book_params)
 
+        #user_idカラムに投稿者のidを格納
+        #取得したbookのレコードのuser_idカラム＝現在ログインしているuserのid
+        book.user_id = current_user.id
+
+        #データベースへの保存を行い遷移するページを指定
         #bookをデータベースに保存し、saveが成功
         if book.save 
             redirect_to :action => "index" 
