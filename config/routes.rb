@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   get 'top/index' => 'top#index'
 
+  get 'books' => 'books#index'
+
   root 'top#index'
+
 end
