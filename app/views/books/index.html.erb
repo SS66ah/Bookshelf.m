@@ -2,6 +2,9 @@
 
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
 
+<br>
+<%= page_entries_info @books %>
+
 <div class="books-container">
     <% @books.each do |t| %>
         <div class="book">
@@ -20,3 +23,5 @@
 
 
 <%= link_to '登録', new_book_path %>
+
+<%= paginate @books %>
