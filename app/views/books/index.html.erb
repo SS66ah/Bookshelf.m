@@ -9,6 +9,7 @@
             <strong>登録日時:</strong>
             <%= t.created_at.to_s(:datetime_jp) %>
             <br>
+            <%= link_to "詳細", book_path(t.id) %>
         </div>
     <% end %>
 </div>
