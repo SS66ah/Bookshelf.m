@@ -33,6 +33,9 @@ class BooksController < ApplicationController
     #詳細
     def show
         @book = Book.find(params[:id])
+
+        @comments = @book.comments
+        @comment = Comment.new
     end
 
     #編集

@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get 'top/index' => 'top#index'
 
   root 'top#index'
-
-  resources :books
+  
+  resources :books do
+    resources :comments, only: [:create]
+  end
 
 
 end
