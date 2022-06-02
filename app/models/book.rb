@@ -25,4 +25,25 @@
 class Book < ApplicationRecord
     belongs_to :user
     has_many :comments, dependent: :destroy
+
+    has_many : rentals
+    has_many : rental_users, through :  :rentals, source: :user 
+
+    #rentalsの中のreturned: falseのものを絞り込み
+    scope :now_rentals, -> {eager_load(:rentals).where(rentals: {returned: false})}
+
+    def rental_user
+        #本に紐づいている、一番最新で借りている人
+        not_returned_rental = rentals.where(returned: false).first
+        #一番最新で借りている人がnilの場合にエラーが出ないようにする
+        #&.：レシーバがnilでもエラーを返さない
+        not_returned_rental&.user
+    end
+
+    #.present?：レシーバーの値が存在すればtrue、存在しなければfalseを返すメソッド
+    #now_rentalがfalse(貸出中)のデータが存在する時→trueを返す
+    def now_rental?
+        rentals.now_rental.present?
+    end 
+
 end
