@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   resources :books do
     resources :comments, only: [:create]
+    resoures :rentals,  only[:create, :update]
   end
 
 
