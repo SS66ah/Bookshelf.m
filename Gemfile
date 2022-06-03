@@ -60,3 +60,5 @@ gem 'devise'
 gem 'kaminari'
 
 gem 'annotate'
+
+gem 'net-smtp'
