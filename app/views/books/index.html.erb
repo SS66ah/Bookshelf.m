@@ -6,17 +6,30 @@
 <%= page_entries_info @books %>
 
 <div class="books-container">
-    <% @books.each do |t| %>
+    <% @books.each do |b| %>
         <div class="book">
             <strong>タイトル:</strong>
-            <%= t.title %>
+            <%= b.title %>
             <br>
             <strong>登録日時:</strong>
-            <%= t.created_at.to_s(:datetime_jp) %>
+            <%= b.created_at.to_s(:datetime_jp) %>
             <br>
-            <%= link_to "詳細", book_path(t.id) %>
-            <%= link_to "編集", edit_book_path(t.id) %>
-            <%= button_to "削除", book_path(t.id), method: :delete %>
+                <% if b.now_rental? 
+                %>
+                    <% if b.rental_user==current_user %>
+                        <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } %>
+                    <% else %>
+                        <span >貸出中</span>
+                <% end %>
+
+                <% else %>
+                    <%= link_to '貸出', book_rentals_path(id: b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' }%>
+            <% end %>
+            <br>
+            <%= link_to "詳細", book_path(b.id) %>
+            <%= link_to "編集", edit_book_path(b.id) %>
+            <%= button_to "削除", book_path(b.id), method: :delete %>
+
         </div>
     <% end %>
 </div>
