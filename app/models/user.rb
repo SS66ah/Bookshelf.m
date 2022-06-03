@@ -27,8 +27,8 @@ class User < ApplicationRecord
          #ユーザーがデータベースから削除されてしまった場合にユーザーがしたコメントも全て消える
          has_many :comments, dependent: :destroy
 
-        has_many :rentals
-        has_many : rental_books, through :  :rentals, source: :book
-        
+         has_many :rentals
+         has_many :rental_books, through: :rentals, source: :book
+
         scope :now_rental_users, -> {eager_load(:rentals).where(rentals: {returned: false})}
 end

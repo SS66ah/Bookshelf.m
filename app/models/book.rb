@@ -26,8 +26,8 @@ class Book < ApplicationRecord
     belongs_to :user
     has_many :comments, dependent: :destroy
 
-    has_many : rentals
-    has_many : rental_users, through :  :rentals, source: :user 
+    has_many :rentals
+    has_many :rental_users, through: :rentals, source: :user 
 
     #rentalsの中のreturned: falseのものを絞り込み
     scope :now_rentals, -> {eager_load(:rentals).where(rentals: {returned: false})}
