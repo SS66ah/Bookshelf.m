@@ -5,10 +5,11 @@ class RentalsController < ApplicationController
         rental = Rental.new(book_id: params[:id], user_id:current_user.id)
         #rentalをデータベースに保存し、saveが成功
         if rental.save
-            redirect_to books_path, notice '貸出処理完了'
+            redirect_to books_path, notice:'貸出処理完了'
         #saveに失敗
         else
-            redirect_to books_path, notice '貸出処理失敗'
+            redirect_to books_path, notice:'貸出処理失敗'
+        end
     end
     
     #返却
@@ -16,6 +17,6 @@ class RentalsController < ApplicationController
         rental = Rental.find(params[:id])
         #returnedをtrueにする
         rental.update(returned: true)
-        redirect_to books_path, notice '返却処理完了'
+        redirect_to books_path, notice:'返却処理完了'
     end
 end

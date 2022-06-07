@@ -17,13 +17,13 @@
                 <% if b.now_rental? 
                 %>
                     <% if b.rental_user==current_user %>
-                        <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } %>
+                        <%= link_to '返却', book_rental_path(book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } %>
                     <% else %>
                         <span >貸出中</span>
                 <% end %>
 
                 <% else %>
-                    <%= link_to '貸出', book_rentals_path(id: b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' }%>
+                    <%= link_to '貸出', book_rentals_path(book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' }%>
             <% end %>
             <br>
             <%= link_to "詳細", book_path(b.id) %>
