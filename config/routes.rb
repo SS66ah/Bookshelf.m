@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'top/index' => 'top#index'
 
-  root 'top#index'
+  root 'books#index'
   
   resources :books do
     resources :comments, only: [:create]
