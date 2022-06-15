@@ -39,7 +39,7 @@
     <% end %>
 
     <% if user_signed_in? %>
-    #commentがbookにアソシエーションによって紐づいている為配列
+
     <%= form_with(model: [@book, @comment], local: true) do |f| %>
         <%= f.text_area :content %>
         <%= button_tag type: "submit" do %>
