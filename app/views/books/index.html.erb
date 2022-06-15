@@ -27,8 +27,10 @@
             <% end %>
             <br>
             <%= link_to "詳細", book_path(b.id) %>
-            <%= link_to "編集", edit_book_path(b.id) %>
-            <%= button_to "削除", book_path(b.id), method: :delete %>
+            <% if user_signed_in? && current_user.id == t.user_id %> 
+                <%= link_to "編集", edit_book_path(b.id) %>
+                <%= button_to "削除", book_path(b.id), method: :delete %>
+            <% end %>
 
         </div>
     <% end %>
