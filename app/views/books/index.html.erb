@@ -4,36 +4,39 @@
 
 <br>
 <%= page_entries_info @books %>
+<div class="container-fluid">
+    <div class="row">
+        <% @books.each do |b| %>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="book">
+                        <img src="/assets/noimage.jpg" class="card-img-top",width="100" height="300">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= b.title %></h5>
+                            <br>
+                            <%= link_to "詳細", book_path(b.id) ,class:"btn btn-outline-dark"%>
+                            
+                                <% if b.now_rental? %>
+                                    <% if b.rental_user==current_user %>
+                                        <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id,book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } ,class:"btn btn-outline-dark"%>
+                                    <% else %>
+                                        <span >貸出中</span>
+                                <% end %>
 
-<div class="books-container">
-    <% @books.each do |b| %>
-        <div class="book">
-            <strong>タイトル:</strong>
-            <%= b.title %>
-            <br>
-            <strong>登録日時:</strong>
-            <%= b.created_at.to_s(:datetime_jp) %>
-            <br>
-                <% if b.now_rental? 
-                %>
-                    <% if b.rental_user==current_user %>
-                        <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id,book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } %>
-                    <% else %>
-                        <span >貸出中</span>
-                <% end %>
-
-                <% else %>
-                    <%= link_to '貸出', book_rentals_path(id:b.id,book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' }%>
-            <% end %>
-            <br>
-            <%= link_to "詳細", book_path(b.id) %>
-            <% if user_signed_in? && current_user.id == t.user_id %> 
-                <%= link_to "編集", edit_book_path(b.id) %>
-                <%= button_to "削除", book_path(b.id), method: :delete %>
-            <% end %>
-
-        </div>
-    <% end %>
+                                <% else %>
+                                    <%= link_to '貸出', book_rentals_path(id:b.id,book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' },class:"btn btn-outline-dark"%>
+                            <% end %>
+                            <% if user_signed_in? && current_user.id == b.user_id %> 
+                                <%= link_to "編集", edit_book_path(b.id),class:"btn btn-outline-dark"%>
+                                <%= link_to "削除", book_path(b.id), method: :delete ,class:"btn btn-outline-dark"%>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        <% end %>
+    </div>
 </div>
 
 <%= link_to '登録', new_book_path %>
