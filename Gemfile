@@ -64,3 +64,5 @@ gem 'annotate'
 
 gem 'net-smtp'
 
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'

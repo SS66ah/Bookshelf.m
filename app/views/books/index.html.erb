@@ -15,7 +15,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="book">
-                        <img src="/assets/no_image.jpg" class="card-img-top",width="100" height="300">
+                    <%= image_tag b.image_url, size: "280x250" if b.image? %>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-9">

@@ -46,4 +46,7 @@ class Book < ApplicationRecord
         rentals.now_rental.present?
     end 
 
+    #imageアップローダーと紐付け
+    mount_uploader :image, ImageUploader
+
 end
