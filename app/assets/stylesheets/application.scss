@@ -14,3 +14,28 @@
  *= require_self
  */
 @import "bootstrap"; 
+
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap');
+
+body {
+    font-family: 'Noto Serif JP', serif;
+}
+
+.pagination>li>a {          
+    border: none;     
+    color: #696969;   
+}
+
+.pagination>.active>a {     
+    background: #93c9ff;     
+    border-radius: 15px;     
+}
+
+.pagination>li>a:hover {        
+    border-radius: 15px;   
+}
+
+.pagination {
+    justify-content: center;
+}

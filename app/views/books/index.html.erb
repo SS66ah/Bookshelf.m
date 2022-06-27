@@ -1,35 +1,55 @@
-<h1>書籍一覧</h1>
-
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-
+<!DOCTYPE html>
 <br>
-<%= page_entries_info @books %>
+<br>
+<br>
+<div class="mx-4">
+    <h1>書籍一覧</h1>
+</div>
+
+<div class="mx-4">
+    
+</div>
 <div class="container-fluid">
     <div class="row">
         <% @books.each do |b| %>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="book">
-                        <img src="/assets/noimage.jpg" class="card-img-top",width="100" height="300">
+                        <img src="/assets/no_image.jpg" class="card-img-top",width="100" height="300">
                         <div class="card-body">
-                            <h5 class="card-title"><%= b.title %></h5>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h1 class="card-title"><%= b.title .truncate(13)%></h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    <%= link_to "詳細", book_path(b.id) ,class:"btn btn-dark btn-sm"%>
+                                </div>
+                            </div>
                             <br>
-                            <%= link_to "詳細", book_path(b.id) ,class:"btn btn-outline-dark"%>
                             
-                                <% if b.now_rental? %>
-                                    <% if b.rental_user==current_user %>
-                                        <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id,book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } ,class:"btn btn-outline-dark"%>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <% if b.now_rental? %>
+                                        <% if b.rental_user==current_user %>
+                                            <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id,book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } ,class:"btn btn-outline-danger"%>
+                                        <% else %>
+                                            <button type="button" class="btn btn-outline-dark" disabled>貸出中 </button>
+                                        <% end %>
                                     <% else %>
-                                        <span >貸出中</span>
-                                <% end %>
+                                        <%= link_to '貸出', book_rentals_path(id:b.id,book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' },class:"btn btn-outline-primary"%>
+                                    <% end %>
+                                </div>
 
-                                <% else %>
-                                    <%= link_to '貸出', book_rentals_path(id:b.id,book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' },class:"btn btn-outline-dark"%>
-                            <% end %>
-                            <% if user_signed_in? && current_user.id == b.user_id %> 
-                                <%= link_to "編集", edit_book_path(b.id),class:"btn btn-outline-dark"%>
-                                <%= link_to "削除", book_path(b.id), method: :delete ,class:"btn btn-outline-dark"%>
-                            <% end %>
+                                <div class="col-sm-8">
+                                    <div class="text-right">
+                                        <% if user_signed_in? && current_user.id == b.user_id %> 
+                                            <%= link_to "編集", edit_book_path(b.id),class:"btn btn-outline-dark"%>
+                                            <%= link_to "削除", book_path(b.id), method: :delete ,class:"btn btn-outline-dark"%>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -39,6 +59,6 @@
     </div>
 </div>
 
-<%= link_to '登録', new_book_path %>
-
+<br>
 <%= paginate @books %>
+<br>

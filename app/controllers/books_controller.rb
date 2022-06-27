@@ -4,7 +4,7 @@ class BooksController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @books = Book.all.page(params[:page]).per(10)
+        @books = Book.all.page(params[:page]).per(8)
     end
 
     #新規登録
