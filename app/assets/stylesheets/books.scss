@@ -8,4 +8,18 @@
 
 .card{
     margin: 15px;
+    overflow: hidden;
+}
+
+.card__imgframe{
+    width: 100%;
+    height: auto;
+    }
+
+.comment-wrapper{
+    margin-left: 15px;
+}
+
+.link{
+    margin-left: 15px;
 }

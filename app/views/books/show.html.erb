@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'books', :media => "all" %>
 <!DOCTYPE html>
 <br>
 <br>
@@ -5,56 +6,66 @@
 <div class="mx-4">
 
 <h1>詳細</h1>
+<br>
 
-    <p>
-        <strong>タイトル:</strong>
-        <%= @book.title %>
-    </p>
-
-    <p>
-        <strong>著者:</strong>
-        <%= @book.author %>
-    </p>
-
-    <p>
-        <strong >出版社:</strong>
-        <%= @book.publisher %>
-    </p>
-
-    <p>
-        <strong>発行年:</strong>
-        <%= @book.year %>
-    </p>
-
-    <p>
-        <strong>Isbnコード:</strong>
-        <%= @book.isbn %>
-    </p>
-
-    <br>
-
-    <div class="comment-wrapper">
-        <p>コメント一覧</p>
-        <% @comments.each do |c| %>
-        <div>
-            <%= c.user.email unless c.user.blank? %>
-            <br>
-            %= c.content %>
-        </div>
-            <br>
-        <% end %>
-
-        <% if user_signed_in? %>
-
-        <%= form_with(model: [@book, @comment], local: true) do |f| %>
-            <%= f.text_area :content %>
-            <%= button_tag type: "submit" do %>
-            <i class="far fa-comments"></i> コメントする
-            <% end %>
-        <% end %>
-        <% end %>
+<div class="row">
+    <div class="col-sm-3">
+        <%= image_tag @book.image_url, width: '100%', height: 'auto'  if @book.image? %>
+        
     </div>
 
-    <br>
-    <%= link_to '書籍一覧', books_path,class:"btn btn-outline-dark" %>
+    <div class="col-sm-9">
+        <p>
+            <strong>タイトル:</strong>
+            <%= @book.title %>
+        </p>
+
+        <p>
+            <strong>著者:</strong>
+            <%= @book.author %>
+        </p>
+
+        <p>
+            <strong >出版社:</strong>
+            <%= @book.publisher %>
+        </p>
+
+        <p>
+            <strong>発行年:</strong>
+            <%= @book.year %>
+        </p>
+
+        <p>
+            <strong>Isbnコード:</strong>
+            <%= @book.isbn %>
+        </p>
+    </div>
 </div>
+
+    <br>
+    <div class="link">
+        <%= link_to '書籍一覧', books_path,class:"btn btn-outline-dark" %>
+    </div>
+    <br>
+    <div class="comment-wrapper">
+            <p>コメント一覧</p>
+            <% @comments.each do |c| %>
+            <div>
+                <%= c.user.email unless c.user.blank? %>
+                <br>
+                %= c.content %>
+            </div>
+                <br>
+            <% end %>
+
+            <% if user_signed_in? %>
+
+            <%= form_with(model: [@book, @comment], local: true) do |f| %>
+                <%= f.text_area :content %>
+                <%= button_tag type: "submit" do %>
+                <i class="far fa-comments"></i> コメントする
+                <% end %>
+            <% end %>
+            <% end %>
+    </div>
+    <br>

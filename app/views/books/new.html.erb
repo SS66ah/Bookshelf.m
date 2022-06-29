@@ -7,8 +7,8 @@
     <br>
     <%= form_for @book do |f| %>
         <div class="field">
-            <%= f.label :image %>
-            <%= f.file_field :image %>
+            <%= f.label :表紙 %>
+            <%= f.file_field :image , id: 'board_board_image'%>
         </div>
 
         <div class="field">
