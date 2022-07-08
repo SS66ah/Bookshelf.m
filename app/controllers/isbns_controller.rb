@@ -1,0 +1,2 @@
+class IsbnsController < ApplicationController
+end
