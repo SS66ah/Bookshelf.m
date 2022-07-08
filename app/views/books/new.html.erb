@@ -6,9 +6,10 @@
     <h1>登録</h1>
     <br>
     <%= form_for @book do |f| %>
+        
         <div class="field">
             <%= f.label :表紙 %>
-            <%= f.file_field :image , id: 'board_board_image'%>
+            <%= f.file_field :image %>
         </div>
 
         <div class="field">
