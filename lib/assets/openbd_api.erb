@@ -1,0 +1,17 @@
+class OpenbdAPI
+    require 'open-uri'
+    require 'json'
+    
+    BASE_URL = 'https://api.openbd.jp/v1/get?isbn='
+    
+    def initialize(isbn)
+        @request_url = BASE_URL + isbn
+    end
+    
+    def main
+        response = open(@request_url).read
+        hash = JSON.parse(response)
+        hash[""][""]
+    end
+
+end
