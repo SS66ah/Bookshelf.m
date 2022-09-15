@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<br>
+<br>
+<br>
+<div class="mx-4">
+    <h1>登録</h1>
+    <br>
+    <h1>ISBNコードから書籍データを取得</h1>
+
+    <%= form_with url: book_isbns_path do |form| %>
+        <%= form.label :isbnコード %>
+        <%= form.text_field :isbn %>
+    <br>
+    <br>  
+    <%= form.submit "登録" %>
+    
+    <% end %>
+
+</div>
