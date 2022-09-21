@@ -66,3 +66,7 @@ gem 'net-smtp'
 
 gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
+
+#ActiveAdmin gem パッケージ
+gem 'devise'
+gem 'activeadmin'
