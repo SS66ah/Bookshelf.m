@@ -332,4 +332,11 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  #Active AdminのCSSの影響を取り除く
+  config.clear_stylesheets!
+  config.register_stylesheet 'active_admin'
+
+  config.clear_javascripts!
+  config.register_javascript 'active_admin'
 end
