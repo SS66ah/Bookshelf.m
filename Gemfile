@@ -68,5 +68,8 @@ gem 'carrierwave', '~> 2.0'
 gem 'mini_magick'
 
 #ActiveAdmin gem パッケージ
-gem 'devise'
 gem 'activeadmin'
+
+#ActiveAdminの日本語化実施
+gem 'rails-i18n'
+gem 'devise-i18n'

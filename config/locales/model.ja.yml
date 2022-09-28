@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      admin_user: "管理者"
+      comment: "コメント"
+      book: "書籍"
+    attributes:
+      admin_user:
+        id: "登録番号"
+        email: "メールアドレス"
+        current_sign_in_at: "ログイン状態"
+        sign_in_count: "ログイン回数"
+        created_at: "作成日"
+      book:
+        id: "登録番号"
+        title: "タイトル"
+        price: "価格"
+        created_at: "作成日"
+        updated_at: "更新日"
