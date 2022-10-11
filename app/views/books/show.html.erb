@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'books', :media => "all" %>
 <!DOCTYPE html>
+
 <br>
 <br>
 <br>
@@ -9,12 +10,12 @@
 <br>
 
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <%= image_tag @book.image_url, width: '100%', height: 'auto'  if @book.image? %>
         
     </div>
 
-    <div class="col-sm-9">
+    <div class="col-sm-8">
         <p>
             <strong>タイトル:</strong>
             <%= @book.title %>
@@ -38,6 +39,26 @@
         <p>
             <strong>Isbnコード:</strong>
             <%= @book.isbn %>
+        </p>
+        <h4>各種検索</h4>
+        <p>
+        <%= link_to 'タイトル', "https://www.google.com/search?q=#{@book.title}" ,class:'btn btn-outline-primary'%><br>
+        </p>
+
+        <p>
+        <%= link_to '著者', "https://www.google.com/search?q=#{@book.author}" ,class:'btn btn-outline-primary'%><br>
+        </p>
+
+        <p>
+        <%= link_to '出版社', "https://www.google.com/search?q=#{@book.publisher}" ,class:'btn btn-outline-primary'%><br>
+        </p>
+
+        <p>
+        <%= link_to '発行年', "https://www.google.com/search?q=#{@book.year}" ,class:'btn btn-outline-primary'%><br>
+        </p>
+
+        <p>
+        <%= link_to 'Isbnコード', "https://www.google.com/search?q=#{@book.isbn}" ,class:'btn btn-outline-primary'%><br>
         </p>
     </div>
 </div>
