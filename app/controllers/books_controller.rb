@@ -50,7 +50,7 @@ class BooksController < ApplicationController
     def destroy
         @book = Book.find(params[:id])
         #book変数の中に格納されている登録情報に対応するレコードを削除
-        book.destroy
+        @book.destroy
         redirect_to action: :index
     end
 
