@@ -6,13 +6,13 @@ class OpenbdApiService
     BASE_URL = 'https://api.openbd.jp/v1/get?isbn='
 
     def execute(isbn)
-        
+
         @request_url = BASE_URL + isbn
         uri = URI.parse(@request_url)
         json = Net::HTTP.get(uri)
-        response = JSON.parse(json)
-        puts response
-
+        result = JSON.parse(json)
+        return result
+        
     end
     
 end

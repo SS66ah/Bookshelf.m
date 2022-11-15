@@ -5,13 +5,16 @@ class IsbnsController < ApplicationController
     end
     
     def create
+        load'openbdapi.erb'
         #response = OpenbdAPI.new(params[:isbn]).main
-        response = OpenbdApiService.new.execute(params[:isbn])
+        res = OpenbdApiService.new
+        response = res.execute(params[:isbn])
+        #response = OpenbdApiService.new.execute(params[:isbn])
+        binding.pry
+        #return redirect_to new_book_isbns_path, notice: 'ISBNコードが存在しません' 
         
-        return redirect_to new_book_isbns_path, notice: 'ISBNコードが存在しません' 
-
         if response[0]["summary"]["title"]
-            title = response[0]["summary"]["title"]
+            t = response[0]["summary"]["title"]
         end
 
         if response[0]["summary"]["author"]
@@ -38,21 +41,26 @@ class IsbnsController < ApplicationController
             pubdate = nil
         end
 
-        if pubdate = response[0]["summary"]["cover"]
+        if response[0]["summary"]["cover"]
             image = response[0]["summary"]["cover"]
         else
             image = nil
         end
+
+        binding.pry
     
         @book = Book.new(
-                        title: title,
+                        title: t,
                         author: author,
                         publisher: publisher,
                         year: pubdate,
                         isbn: isbn,
-                        image: image
+                        
                         )
         @book.user = current_user
+        @book.remote_image_url = image
+
+        binding.pry
 
         if @book.save
             redirect_to new_book_isbns_path(@book), notice: '書籍情報が正しく登録されました'
@@ -63,23 +71,4 @@ class IsbnsController < ApplicationController
         end
         
     end
-end
-
-class OpenbdApiService
-    require 'net/http'
-    require 'uri'
-    require 'json'
-    
-    BASE_URL = 'https://api.openbd.jp/v1/get?isbn='
-
-    def execute(isbn)
-        
-        @request_url = BASE_URL + isbn
-        uri = URI.parse(@request_url)
-        json = Net::HTTP.get(uri)
-        response = JSON.parse(json)
-        puts response
-
-    end
-    
 end
