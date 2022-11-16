@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <%= image_tag @book.image_url, width: '100%', height: 'auto'  if @book.image? %>
+        <%= image_tag @book.image_url, width: '400', height: '450'  if @book.image? %>
         
     </div>
 
@@ -42,7 +42,7 @@
         </p>
         <h4>各種検索</h4>
         <p>
-        <%= link_to 'タイトル', "https://www.google.com/search?q=#{@book.title}" ,class:'btn btn-outline-primary'%><br>
+        <%= link_to 'タイトル', "https://www.google.com/search?q=#{@book.title}+#{@book.author}" ,class:'btn btn-outline-primary'%><br>
         </p>
 
         <p>
@@ -60,6 +60,41 @@
         <p>
         <%= link_to 'Isbnコード', "https://www.google.com/search?q=#{@book.isbn}" ,class:'btn btn-outline-primary'%><br>
         </p>
+        
+
+        <HTML>
+        <HEAD>
+        <SCRIPT LANGUAGE="JavaScript">
+        function jump(){
+            var flag = 0;
+            for(i=0; i<document.forms[0].url.length; i++){
+                if(document.forms[0].url[i].checked){
+                    flag = 1;
+                    window.location.href = document.forms[0].url[i].value;
+                }
+            }
+            if(flag == 0){
+                alert('ラジオボタンが選択されていません。');
+            }
+        }
+        </SCRIPT>
+        </HEAD>
+        <BODY>
+        <FORM>
+        <INPUT TYPE="radio" NAME="url" VALUE="https://www.google.com/search?q=#{@book.title}">タイトル
+        <INPUT TYPE="radio" NAME="url" VALUE="http://www.2.com/">
+        <INPUT TYPE="radio" NAME="url" VALUE="http://www.3.com/">
+        <INPUT TYPE="button" onClick="jump();" VALUE="検索">
+        </FORM>
+        </BODY>
+        </HTML>
+
+
+
+
+
+
+        
     </div>
 </div>
 

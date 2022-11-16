@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'books', :media => "all" %>
+
 <!DOCTYPE html>
 <br>
 <br>
@@ -16,12 +18,12 @@
                 <div class="card">
                     <div class="book">
                     <div class="card__imgframe">
-                        <%= image_tag b.image_url, width: '100%', height: 'auto' if b.image? %>
+                        <%= image_tag b.image_url, width: '300', height: '350' if b.image? %>
                     </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-9">
-                                    <h1 class="card-title"><%= b.title .truncate(13)%></h1>
+                                    <h5 class="card-title"><%= b.title .truncate(13)%></h5>
                                 </div>
                                 <div class="col-sm-3">
                                     <%= link_to "詳細", book_path(b.id) ,class:"btn btn-dark btn-sm"%>
