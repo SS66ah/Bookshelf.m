@@ -7,6 +7,8 @@
     <br>
     <h1>ISBNコードから書籍データを取得</h1>
 
+    <p> <%= notice %> </p>
+
     <%= form_with url: book_isbns_path do |form| %>
         <%= form.label :isbnコード %>
         <%= form.text_field :isbn %>

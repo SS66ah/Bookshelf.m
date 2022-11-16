@@ -10,65 +10,70 @@ class IsbnsController < ApplicationController
         res = OpenbdApiService.new
         response = res.execute(params[:isbn])
         #response = OpenbdApiService.new.execute(params[:isbn])
-        binding.pry
-        #return redirect_to new_book_isbns_path, notice: 'ISBNコードが存在しません' 
-        
-        if response[0]["summary"]["title"]
-            t = response[0]["summary"]["title"]
-        end
+        #binding.pry
 
-        if response[0]["summary"]["author"]
-            author = response[0]["summary"]["author"]
-        else 
-            author = nil
-        end
+        #ISBNコードがないor適当な数字の時
+        if response == [nil]
+            redirect_to new_book_isbns_path, notice: 'ISBNコードが存在しません'
+            return
 
-        if response[0]["summary"]["publisher"]
-            publisher = response[0]["summary"]["publisher"]
-        else 
-            publisher = nil
-        end
-
-        if response[0]["summary"]["isbn"]
-            isbn = response[0]["summary"]["isbn"]
-        else 
-            isbn = nil
-        end
-
-        if response[0]["summary"]["pubdate"]
-            pubdate = response[0]["summary"]["pubdate"]
-        else 
-            pubdate = nil
-        end
-
-        if response[0]["summary"]["cover"]
-            image = response[0]["summary"]["cover"]
+        #ISBNコードがあるとき
         else
-            image = nil
-        end
+            if response[0]["summary"]["title"]
+                title = response[0]["summary"]["title"]
+            end
 
-        binding.pry
-    
-        @book = Book.new(
-                        title: t,
-                        author: author,
-                        publisher: publisher,
-                        year: pubdate,
-                        isbn: isbn,
-                        
-                        )
-        @book.user = current_user
-        @book.remote_image_url = image
+            if response[0]["summary"]["author"]
+                author = response[0]["summary"]["author"]
+            else
+                author = nil
+            end
 
-        binding.pry
+            if response[0]["summary"]["publisher"]
+                publisher = response[0]["summary"]["publisher"]
+            else 
+                publisher = nil
+            end
 
-        if @book.save
-            redirect_to new_book_isbns_path(@book), notice: '書籍情報が正しく登録されました'
+            if response[0]["summary"]["isbn"]
+                isbn = response[0]["summary"]["isbn"]
+            else 
+                isbn = nil
+            end
+
+            if response[0]["summary"]["pubdate"]
+                pubdate = response[0]["summary"]["pubdate"]
+            else 
+                pubdate = nil
+            end
+
+            if response[0]["summary"]["cover"]
+                image = response[0]["summary"]["cover"]
+            else
+                image = nil
+            end
+
             
-        else
-            redirect_to new_book_isbns_path, notice: '同一の書籍が既に登録されています'
-            
-        end
         
+            @book = Book.new(
+                            title: title,
+                            author: author,
+                            publisher: publisher,
+                            year: pubdate,
+                            isbn: isbn,
+                            
+                            )
+            @book.user = current_user
+            @book.remote_image_url = image
+
+            #binding.pry
+
+            if @book.save
+                redirect_to new_book_isbns_path, notice: '書籍情報が正しく登録されました'
+                
+            else
+                redirect_to new_book_isbns_path, notice: '同一の書籍が既に登録されています'
+            end
+        end
     end
 end
