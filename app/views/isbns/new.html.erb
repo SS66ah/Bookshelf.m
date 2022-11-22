@@ -5,16 +5,18 @@
 <div class="mx-4">
     <h1>登録</h1>
     <br>
-    <h1>ISBNコードから書籍データを取得</h1>
+    <h4>ISBNコードから書籍データを取得</h4>
 
-    <p> <%= notice %> </p>
+    <div class="w-50 p-3">
+        <%= render partial: 'layouts/flash' %>
+    </div>
 
     <%= form_with url: book_isbns_path do |form| %>
         <%= form.label :isbnコード %>
         <%= form.text_field :isbn %>
     <br>
     <br>  
-    <%= form.submit "登録" %>
+    <%= form.submit "登録",class:"btn btn-outline-primary" %>
     
     <% end %>
 

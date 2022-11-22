@@ -12,10 +12,20 @@ class IsbnsController < ApplicationController
         #response = OpenbdApiService.new.execute(params[:isbn])
         #binding.pry
 
+        #登録済みのISBNコードが入力された時
+        if
+            Book.where(isbn: "#{params[:isbn]}").count >= 1
+            flash[:info] = "登録済みのISBNコードが入力されたため登録できませんでした"
+            redirect_to new_book_isbns_path
+            return
+        end
+
         #ISBNコードがないor適当な数字の時
         if response == [nil]
-            redirect_to new_book_isbns_path, notice: 'ISBNコードが存在しません'
+            flash[:info] ="ISBNコードが存在しません"
+            redirect_to new_book_isbns_path
             return
+
 
         #ISBNコードがあるとき
         else
@@ -69,10 +79,12 @@ class IsbnsController < ApplicationController
             #binding.pry
 
             if @book.save
-                redirect_to new_book_isbns_path, notice: '書籍情報が正しく登録されました'
+                flash[:success] ="書籍情報が正しく登録されました"
+                redirect_to new_book_isbns_path
                 
             else
-                redirect_to new_book_isbns_path, notice: '同一の書籍が既に登録されています'
+                flash[:danger] ="正常に登録されませんでした"
+                redirect_to new_book_isbns_path
             end
         end
     end
