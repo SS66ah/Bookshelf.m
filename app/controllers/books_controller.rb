@@ -55,8 +55,8 @@ class BooksController < ApplicationController
     end
 
     def update
-        @book = Book.find(params[:id])
-        if @book.update(book_params)
+        book = Book.find(params[:id])
+        if book.update(book_params)
             redirect_to :action => "show", :id => book.id
         else
             redirect_to :action => "new"

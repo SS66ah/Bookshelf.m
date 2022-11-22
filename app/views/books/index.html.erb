@@ -48,7 +48,7 @@
                                     <div class="text-right">
                                         <% if user_signed_in? && current_user.id == b.user_id %> 
                                             <%= link_to "編集", edit_book_path(b.id),class:"btn btn-outline-dark"%>
-                                            <%= link_to "削除", book_path(b.id), method: :delete ,class:"btn btn-outline-dark"%>
+                                            <%= link_to "削除", book_path(b.id), method: :delete , "data-confirm"=>"本当に消しますか？",class:"btn btn-outline-dark"%>
                                         <% end %>
                                     </div>
                                 </div>
