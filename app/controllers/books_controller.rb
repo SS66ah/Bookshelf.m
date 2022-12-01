@@ -4,7 +4,15 @@ class BooksController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @books = Book.all.page(params[:page]).per(8)
+        
+        if params[:search] == nil
+            @books = Book.all.page(params[:page]).per(8)
+          elsif params[:search] == ''
+            @books = Book.all.page(params[:page]).per(8)
+          else
+            #部分検索
+            @books = Book.where("title LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(8)
+          end
     end
 
     #新規登録
