@@ -62,7 +62,6 @@ class IsbnsController < ApplicationController
             else
                 image = nil
             end
-
             
         
             @book = Book.new(
@@ -71,7 +70,6 @@ class IsbnsController < ApplicationController
                             publisher: publisher,
                             year: pubdate,
                             isbn: isbn,
-                            
                             )
             @book.user = current_user
             @book.remote_image_url = image

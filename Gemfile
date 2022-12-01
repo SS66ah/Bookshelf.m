@@ -75,3 +75,5 @@ gem 'rails-i18n'
 gem 'devise-i18n'
 
 gem 'pry-rails'
+
+gem 'roo', '~>2.8.0'
