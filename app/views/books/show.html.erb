@@ -40,7 +40,14 @@
             <strong>Isbnコード:</strong>
             <%= @book.isbn %>
         </p>
-        <h4>各種検索</h4>
+        <h4>関連検索</h4>
+
+        <script async src="https://cse.google.com/cse.js?cx=55c08b61a93d84f1a">
+        </script>
+        <div class="gcse-search"></div>
+<%
+=begin
+%>
         <p>
         <%= link_to 'タイトル', "https://www.google.com/search?q=#{@book.title}+#{@book.author}" ,class:'btn btn-outline-primary'%><br>
         </p>
@@ -92,7 +99,9 @@
 
 
 
-
+<%
+=end
+%>
 
         
     </div>
