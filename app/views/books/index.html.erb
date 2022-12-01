@@ -9,7 +9,13 @@
 </div>
 
 <div class="mx-4">
-    
+    <br>
+    <h5>タイトル検索</h5>
+    <%= form_tag({controller:"books",action:"index"}, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索する' ,class:"btn btn-dark btn-sm" %>
+    <% end %>
+    <br>
 </div>
 <div class="container-fluid">
     <div class="row">
