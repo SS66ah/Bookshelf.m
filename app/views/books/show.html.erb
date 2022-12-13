@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-sm-4">
     
-        <% if b.image.present? %>
+        <% if @book.image.present? %>
             <%= image_tag @book.image_url, width: '400', height: '450' %>
         <% else %>
             <%= image_tag 'no_image.jpg', width: '400', height: '450' %>
