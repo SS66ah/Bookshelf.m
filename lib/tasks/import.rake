@@ -1,4 +1,5 @@
 require 'csv'
+require 'open-uri'
 
 # rake import:bole_db
 namespace :import do
@@ -16,11 +17,12 @@ namespace :import do
           author: row["author"],
           publisher: row["publisher"],
           year: row["year"],
-          user_id: row["user_id"]
-          image: row["image"]
+          user_id: row["user_id"],
+          image: row["cover"]
       }
     end
     puts "start to create books data"
+    binding.pry
     begin
       Book.create!(list) #クラス名注意
       puts "completed!!"

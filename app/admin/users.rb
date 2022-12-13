@@ -15,6 +15,17 @@ ActiveAdmin.register User do
   #   permitted
   # end
 
-  permit_params :email, :name,:encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :email, :name,:encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at,:password, :password_confirmation
+
+  form do |f|
+    f.inputs do
+      
+      f.input :name , label: '名前'
+      f.input :email ,label: 'メールアドレス'
+      f.input :password ,label: 'パスワード'
+      f.input :password_confirmation ,label: '確認用パスワード'
+    end
+    f.actions
+  end
   
 end

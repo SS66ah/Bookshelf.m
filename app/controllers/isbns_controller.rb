@@ -62,7 +62,7 @@ class IsbnsController < ApplicationController
             else
                 image = nil
             end
-            
+
         
             @book = Book.new(
                             title: title,
@@ -74,7 +74,6 @@ class IsbnsController < ApplicationController
             @book.user = current_user
             @book.remote_image_url = image
 
-            #binding.pry
 
             if @book.save
                 flash[:success] ="書籍情報が正しく登録されました"
