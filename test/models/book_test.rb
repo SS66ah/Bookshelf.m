@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  author         :string
-#  image          :string
+#  image          :text
 #  isbn           :string
 #  publisher      :string
 #  title          :text

@@ -24,7 +24,11 @@
                 <div class="card">
                     <div class="book">
                     <div class="card__imgframe">
-                        <%= image_tag b.image_url, width: '300', height: '350' if b.image? %>
+                        <% if b.image.present? %>
+                            <%= image_tag b.image_url, width: '300', height: '350' %>
+                        <% else %>
+                            <%= image_tag 'no_image.jpg', width: '300', height: '350' %>
+                        <% end %>
                     </div>
                         <div class="card-body">
                             <div class="row">
