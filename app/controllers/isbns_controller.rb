@@ -81,7 +81,7 @@ class IsbnsController < ApplicationController
                 end
             end
 
-            binding.pry
+            
 
             if response[0]["onix"]["CollateralDetail"]["TextContent"][3].present?
                 if response[0]["onix"]["CollateralDetail"]["TextContent"][3]["TextType"] == "04"
@@ -89,7 +89,6 @@ class IsbnsController < ApplicationController
                 end
             end
 
-            binding.pry
 
         
             @book = Book.new(
