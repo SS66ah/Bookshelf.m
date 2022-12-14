@@ -17,7 +17,36 @@
         <% else %>
             <%= image_tag 'no_image.jpg', width: '400', height: '450' %>
         <% end %>
+
+        <br>
+        <br>
         
+        <div class="link">
+        <%= link_to '書籍一覧', books_path,class:"btn btn-outline-dark" %>
+        </div>
+        <br>
+        <div class="comment-wrapper">
+                <p>コメント一覧</p>
+                <% @comments.each do |c| %>
+                <div>
+                    <%= c.user.email unless c.user.blank? %>
+                    <br>
+                    %= c.content %>
+                </div>
+                    <br>
+                <% end %>
+
+                <% if user_signed_in? %>
+
+                <%= form_with(model: [@book, @comment], local: true) do |f| %>
+                    <%= f.text_area :content %>
+                    <%= button_tag type: "submit" do %>
+                    <i class="far fa-comments"></i> コメントする
+                    <% end %>
+                <% end %>
+                <% end %>
+        </div>
+            
     </div>
 
     <div class="col-sm-8">
@@ -45,6 +74,16 @@
             <strong>Isbnコード:</strong>
             <%= @book.isbn %>
         </p>
+
+
+        <p>
+            <details>
+            <summary>目次</summary>
+            
+            <%= simple_format(@book.content) %>
+            </details>
+        </p>
+
         <h4>関連検索</h4>
 
         <script async src="https://cse.google.com/cse.js?cx=55c08b61a93d84f1a">
@@ -110,32 +149,3 @@
 
         
     </div>
-</div>
-
-    <br>
-    <div class="link">
-        <%= link_to '書籍一覧', books_path,class:"btn btn-outline-dark" %>
-    </div>
-    <br>
-    <div class="comment-wrapper">
-            <p>コメント一覧</p>
-            <% @comments.each do |c| %>
-            <div>
-                <%= c.user.email unless c.user.blank? %>
-                <br>
-                %= c.content %>
-            </div>
-                <br>
-            <% end %>
-
-            <% if user_signed_in? %>
-
-            <%= form_with(model: [@book, @comment], local: true) do |f| %>
-                <%= f.text_area :content %>
-                <%= button_tag type: "submit" do %>
-                <i class="far fa-comments"></i> コメントする
-                <% end %>
-            <% end %>
-            <% end %>
-    </div>
-    <br>

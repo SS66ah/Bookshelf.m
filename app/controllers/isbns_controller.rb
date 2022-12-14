@@ -63,6 +63,34 @@ class IsbnsController < ApplicationController
                 image = nil
             end
 
+            if response[0]["onix"]["CollateralDetail"]["TextContent"][0].present?
+                if response[0]["onix"]["CollateralDetail"]["TextContent"][0]["TextType"] == "04"
+                    content = response[0]["onix"]["CollateralDetail"]["TextContent"][0]["Text"]
+                end
+            end
+
+            if response[0]["onix"]["CollateralDetail"]["TextContent"][1].present?
+                if response[0]["onix"]["CollateralDetail"]["TextContent"][1]["TextType"] == "04"
+                    content = response[0]["onix"]["CollateralDetail"]["TextContent"][1]["Text"]
+                end
+            end
+
+            if response[0]["onix"]["CollateralDetail"]["TextContent"][2].present?
+                if response[0]["onix"]["CollateralDetail"]["TextContent"][2]["TextType"] == "04"
+                    content = response[0]["onix"]["CollateralDetail"]["TextContent"][2]["Text"]
+                end
+            end
+
+            binding.pry
+
+            if response[0]["onix"]["CollateralDetail"]["TextContent"][3].present?
+                if response[0]["onix"]["CollateralDetail"]["TextContent"][3]["TextType"] == "04"
+                    content = response[0]["onix"]["CollateralDetail"]["TextContent"][3]["Text"]
+                end
+            end
+
+            binding.pry
+
         
             @book = Book.new(
                             title: title,
@@ -70,6 +98,7 @@ class IsbnsController < ApplicationController
                             publisher: publisher,
                             year: pubdate,
                             isbn: isbn,
+                            content: content
                             )
             @book.user = current_user
             @book.remote_image_url = image
