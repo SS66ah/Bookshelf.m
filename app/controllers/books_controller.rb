@@ -7,12 +7,12 @@ class BooksController < ApplicationController
         
         if params[:search] == nil
             @books = Book.all.page(params[:page]).per(24)
-          elsif params[:search] == ''
+        elsif params[:search] == ''
             @books = Book.all.page(params[:page]).per(24)
-          else
+        else
             #部分検索
             @books = Book.where("title LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(24)
-          end
+        end
     end
 
     #新規登録
@@ -74,7 +74,7 @@ class BooksController < ApplicationController
 
     private
         def book_params
-            params.require(:book).permit(:title, :author, :publisher, :year, :isbn, :image)
+            params.require(:book).permit(:title, :author, :publisher, :year, :isbn, :image,:content)
         end
 
 end
