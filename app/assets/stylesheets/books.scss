@@ -6,6 +6,8 @@
     display: flex;  
     align-items: center; //縦方向を中央
     justify-content: center; //横方向を中央
+    max-width: 100%;
+	height: auto;
 }
 
 .card-title{
