@@ -15,40 +15,14 @@
         
             <div class="imgframe">
                 <% if @book.image.present? %>
-                    <%= image_tag @book.image_url, width: '500', height: '550' %>
+                    <%= image_tag @book.image_url, width: '400', height: '450' %>
                 <% else %>
-                    <%= image_tag 'no_image.jpg', width: '500', height: '550' %>
+                    <%= image_tag 'no_image.jpg', width: '400', height: '450' %>
                 <% end %>
             </div>
             <br>
             <br>
-            
-            <div class="link">
-            <%= link_to '書籍一覧', books_path,class:"btn btn-outline-dark" %>
-            </div>
             <br>
-            <div class="comment-wrapper">
-                    <p>コメント一覧</p>
-                    <% @comments.each do |c| %>
-                    <div>
-                        <%= c.user.email unless c.user.blank? %>
-                        <br>
-                        %= c.content %>
-                    </div>
-                        <br>
-                    <% end %>
-
-                    <% if user_signed_in? %>
-
-                    <%= form_with(model: [@book, @comment], local: true) do |f| %>
-                        <%= f.text_area :content %>
-                        <%= button_tag type: "submit" do %>
-                        <i class="far fa-comments"></i> コメントする
-                        <% end %>
-                    <% end %>
-                    <% end %>
-            </div>
-                
         </div>
 
         <div class="col-sm">
@@ -86,11 +60,39 @@
                 </details>
             </p>
 
-            <h4>関連検索</h4>
+            <div class="comment-wrapper">
+                <details>
+                    <summary>コメント一覧</summary>
+                    <% @comments.each do |c| %>
+                    <div>
+                        <%= c.user.email unless c.user.blank? %>
+                        <br>
+                        %= c.content %>
+                    </div>
+                        <br>
+                    <% end %>
+
+                    <% if user_signed_in? %>
+
+                    <%= form_with(model: [@book, @comment], local: true) do |f| %>
+                        <%= f.text_area :content %>
+                        <%= button_tag type: "submit" do %>
+                        <i class="far fa-comments"></i> コメントする
+                        <% end %>
+                    <% end %>
+                    <% end %>
+                </details>
+            </div>
+
+            <br>
+
+            <h6>関連検索</h6>
 
             <script async src="https://cse.google.com/cse.js?cx=55c08b61a93d84f1a">
             </script>
             <div class="gcse-search"></div>
+
+            
 <%
 =begin
 %>
