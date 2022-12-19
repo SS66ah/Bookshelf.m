@@ -6,12 +6,12 @@ class BooksController < ApplicationController
     def index
         
         if params[:search] == nil
-            @books = Book.all.page(params[:page]).per(20)
+            @books = Book.all.page(params[:page]).per(20).order("created_at DESC")
         elsif params[:search] == ''
-            @books = Book.all.page(params[:page]).per(20)
+            @books = Book.all.page(params[:page]).per(20).order("created_at DESC")
         else
             #部分検索
-            @books = Book.where("title LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(20)
+            @books = Book.where("title LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(20).order("created_at DESC")
         end
     end
 
