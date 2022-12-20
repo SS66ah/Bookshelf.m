@@ -23,6 +23,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        <script>
+          $('.navbar-nav>li>a , .dropdown-menu>a').on('click', function(){
+              if(this.id != 'navbarDropdown'){
+                $('.navbar-collapse').collapse('hide');
+              }
+          });
+        </script>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <ul class="navbar-nav mr-auto">
