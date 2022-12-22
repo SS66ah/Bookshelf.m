@@ -13,7 +13,9 @@
     <h5>タイトル検索</h5>
     <%= form_tag({controller:"books",action:"index"}, method: :get) do %>
     <%= text_field_tag :search %>
-    <%= submit_tag '検索する' ,class:"btn btn-dark btn-sm" %>
+    <div class="search_btn">
+        <%= submit_tag '検索' ,class:"btn btn-dark btn-sm" %>
+    </div>
     <% end %>
     <br>
 </div>
