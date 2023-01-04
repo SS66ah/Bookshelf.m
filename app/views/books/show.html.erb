@@ -25,7 +25,6 @@
             <br>
             <br>
         </div>
-
         <div class="col-sm-8">
             <p>
                 <strong>タイトル:</strong>
@@ -66,9 +65,9 @@
                     <summary>コメント一覧</summary>
                     <% @comments.each do |c| %>
                     <div>
-                        <%= c.user.email unless c.user.blank? %>
+                        <%= c.user.name unless c.user.blank? %>
                         <br>
-                        %= c.content %>
+                        <%= c.content %>
                     </div>
                         <br>
                     <% end %>
@@ -84,72 +83,85 @@
                     <% end %>
                 </details>
             </div>
-
             <br>
-
-            <h6>Web検索</h6>
-
+        </div>
+    </div>
+    <div class="w-100"></div>
+    <div class="row">
+        <div class="seach-title">
+            <h5>内容検索</h5>
+                    <%= form_tag({controller:"books",action:"show"}, method: :get) do %>
+                    <%= text_field_tag :search %>
+                    <div class="search_btn">
+                        <%= submit_tag '検索' ,class:"btn btn-dark btn-sm" %>
+                        </div>
+                    <% end %>
+                    <br>
+                    </div>
+                <div class="container">
+                    <div class="row">
+                        <% @books.each do |b| %>
+                            <div class="col-sm">
+                                <div class="card">
+                                    <div class="book">
+                                    <div class="card__imgframe">
+                                        <% if b.image.present? %>
+                                            <%= image_tag b.image_url, width: '300', height: '350' %>
+                                        <% else %>
+                                            <%= image_tag 'no_image.jpg', width: '300', height: '350' %>
+                                        <% end %>
+                                    </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm">
+                                                    <h5 class="card-title"><%= b.title .truncate(12)%></h5>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <%= link_to "詳細", book_path(b.id) ,class:"btn btn-dark btn-sm"%>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <% if b.now_rental? %>
+                                                        <% if b.rental_user==current_user %>
+                                                            <%= link_to '返却', book_rental_path(id: b.rentals.now_rental.first.id,book_id:b.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } ,class:"btn btn-outline-danger"%>
+                                                        <% else %>
+                                                            <button type="button" class="btn btn-outline-dark" disabled>貸出中 </button>
+                                                        <% end %>
+                                                    <% else %>
+                                                        <%= link_to '貸出', book_rentals_path(id:b.id,book_id:b.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' },class:"btn btn-outline-primary"%>
+                                                    <% end %>
+                                                </div>
+                
+                                                <div class="col-sm-8">
+                                                    <div class="text-right">
+                                                        <% if user_signed_in? && current_user.id == b.user_id %> 
+                                                            <%= link_to "編集", edit_book_path(b.id),class:"btn btn-outline-dark"%>
+                                                            <%= link_to "削除", book_path(b.id), method: :delete , "data-confirm"=>"本当に消しますか？",class:"btn btn-outline-dark"%>
+                                                        <% end %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Google-seach">
+            <br>
+            <h5>Web検索</h5>
             <script async src="https://cse.google.com/cse.js?cx=55c08b61a93d84f1a">
             </script>
             <div class="gcse-search"></div>
             <br>
-            <br>
-
-            
-<%
-=begin
-%>
-            <p>
-            <%= link_to 'タイトル', "https://www.google.com/search?q=#{@book.title}+#{@book.author}" ,class:'btn btn-outline-primary'%><br>
-            </p>
-
-            <p>
-            <%= link_to '著者', "https://www.google.com/search?q=#{@book.author}" ,class:'btn btn-outline-primary'%><br>
-            </p>
-
-            <p>
-            <%= link_to '出版社', "https://www.google.com/search?q=#{@book.publisher}" ,class:'btn btn-outline-primary'%><br>
-            </p>
-
-            <p>
-            <%= link_to '発行年', "https://www.google.com/search?q=#{@book.year}" ,class:'btn btn-outline-primary'%><br>
-            </p>
-
-            <p>
-            <%= link_to 'Isbnコード', "https://www.google.com/search?q=#{@book.isbn}" ,class:'btn btn-outline-primary'%><br>
-            </p>
-            
-
-            <HTML>
-            <HEAD>
-            <SCRIPT LANGUAGE="JavaScript">
-            function jump(){
-                var flag = 0;
-                for(i=0; i<document.forms[0].url.length; i++){
-                    if(document.forms[0].url[i].checked){
-                        flag = 1;
-                        window.location.href = document.forms[0].url[i].value;
-                    }
-                }
-                if(flag == 0){
-                    alert('ラジオボタンが選択されていません。');
-                }
-            }
-            </SCRIPT>
-            </HEAD>
-            <BODY>
-            <FORM>
-            <INPUT TYPE="radio" NAME="url" VALUE="https://www.google.com/search?q=#{@book.title}">タイトル
-            <INPUT TYPE="radio" NAME="url" VALUE="http://www.2.com/">
-            <INPUT TYPE="radio" NAME="url" VALUE="http://www.3.com/">
-            <INPUT TYPE="button" onClick="jump();" VALUE="検索">
-            </FORM>
-            </BODY>
-            </HTML>
-
-<%
-=end
-%>
-
-</div>
+        </div>
+    </div>
 </div>

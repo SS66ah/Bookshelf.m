@@ -47,6 +47,15 @@ class BooksController < ApplicationController
         #newアクション(コメント)
         @comment = Comment.new
         @comments = @book.comments
+
+        if params[:search] == nil
+            @books = Book.first(0)
+        elsif params[:search] == ''
+            @books = Book.first(0)
+        else
+            #部分検索
+            @books = Book.where("content LIKE ? ",'%' + params[:search] + '%')
+        end
     end
 
     #編集
