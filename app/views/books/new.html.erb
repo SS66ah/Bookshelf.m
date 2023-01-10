@@ -5,6 +5,10 @@
 <div class="mx-4">
     <h1>登録</h1>
     <br>
+    <div class="w-50 p-3">
+        <%= render partial: 'layouts/flash' %>
+    </div>
+    <br>
     <%= form_for @book do |f| %>
         
         <div class="field">
@@ -35,6 +39,11 @@
         <div class="field">
         <%= f.label :ISBN %>
         <%= f.text_field :isbn %>
+        </div>
+
+        <div class="field">
+        <%= f.label :目次 %>
+        <%= f.text_field :content %>
         </div>
 
         <br>

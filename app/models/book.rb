@@ -50,4 +50,12 @@ class Book < ApplicationRecord
     #imageアップローダーと紐付け
     mount_uploader :image, ImageUploader
 
+
+    validates :title, presence: true, length: { maximum: 200 }
+    validates :author,length: { maximum: 200 }
+    validates :isbn,length: { maximum: 50 }
+    validates :publisher,length: { maximum: 100 }
+    validates :year,length: { maximum: 50 }
+    validates :content,length: { maximum: 2000 }
+
 end

@@ -33,10 +33,12 @@ class BooksController < ApplicationController
         #データベースへの保存を行い遷移するページを指定
         #bookをデータベースに保存し、saveが成功
         if @book.save 
-            redirect_to :action => "index" 
+            flash[:success] ="書籍情報が正しく登録されました"
+            redirect_to new_book_path
         #saveが失敗
         else
-            redirect_to :action => "new"
+            flash[:danger] ="正常に登録されませんでした"
+            redirect_to new_book_path
         end
     end
 
