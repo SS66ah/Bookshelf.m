@@ -23,6 +23,26 @@
             </div>
             <br>
             <br>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="text-center">
+                        <% if @book.now_rental? %>
+                            <% if @book.rental_user==current_user %>
+                                <%= link_to '返却', book_rental_path(id: @book.rentals.now_rental.first.id,book_id:@book.rentals.now_rental.first.id), method: :patch, data: { confirm: '書籍の返却を行いますか？' } ,class:"btn btn-outline-danger btn-lg w-25"%>
+                            <% else %>
+                                <button type="button" class="btn btn-outline-dark btn-lg w-25" disabled>貸出中 </button>
+                            <% end %>
+                        <% else %>
+                            <%= link_to '貸出', book_rentals_path(id:@book.id,book_id:@book.id), method: :post, data: { confirm: '書籍の貸出を行いますか？' },class:"btn btn-outline-primary btn-lg w-25"%>
+                        <% end %>
+                        <% if user_signed_in? && current_user.id == @book.user_id %> 
+                                <%= link_to "編集", edit_book_path(@book.id),class:"btn btn-outline-dark btn-lg w-25"%>
+                                <%= link_to "削除", book_path(@book.id), method: :delete , "data-confirm"=>"本当に消しますか？",class:"btn btn-outline-dark btn-lg w-25"%>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <br>
             <br>
         </div>
         <div class="col-sm-8">
@@ -49,7 +69,7 @@
             <p>
                 <strong>Isbnコード:</strong>
                 <%= @book.isbn %>
-            </p>
+            </p>     
 
 
             <p>
@@ -60,7 +80,8 @@
                 </details>
             </p>
 
-            <div class="comment-wrapper">
+            <div class="comment-wrapper w-50">
+                    <%= render partial: 'layouts/flash' %>
                 <details>
                     <summary>コメント一覧</summary>
                     <% @comments.each do |c| %>
