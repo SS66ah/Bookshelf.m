@@ -64,7 +64,7 @@ class BooksController < ApplicationController
         else
             #部分検索
             @keyword = params[:search]
-            @books = Book.where("content LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(20).order("created_at DESC")
+            @books = Book.where("content LIKE ? ",'%' + params[:search] + '%')
         end
     end
 
