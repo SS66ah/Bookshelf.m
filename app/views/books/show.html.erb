@@ -111,6 +111,11 @@
     <div class="row">
         <div class="seach-title">
             <h5>内容検索</h5>
+            <details>
+                <p>
+                    検索ボックスに入力した単語が含まれる研究室内の本を表示します
+                </p>
+            </details>
                     <%= form_tag({controller:"books",action:"show"}, method: :get) do %>
                     <%= text_field_tag :search %>
                     <div class="search_btn">
