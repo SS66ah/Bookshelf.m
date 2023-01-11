@@ -23,22 +23,29 @@ class BooksController < ApplicationController
 
     #新規登録
     def create
-        #bookレコードに投稿内容を格納
-        @book = Book.new(book_params)
-
-        #user_idカラムに投稿者のidを格納
-        #取得したbookのレコードのuser_idカラム＝現在ログインしているuserのid
-        @book.user_id = current_user.id
-
-        #データベースへの保存を行い遷移するページを指定
-        #bookをデータベースに保存し、saveが成功
-        if @book.save 
-            flash[:success] ="書籍情報が正しく登録されました"
+        if not
+            Book.where(isbn: "#{params[:isbn]}").count >= 1
+            flash[:info] = "登録済みであるため登録できませんでした"
             redirect_to new_book_path
-        #saveが失敗
+            return
         else
-            flash[:danger] ="正常に登録されませんでした"
-            redirect_to new_book_path
+            #bookレコードに投稿内容を格納
+            @book = Book.new(book_params)
+
+            #user_idカラムに投稿者のidを格納
+            #取得したbookのレコードのuser_idカラム＝現在ログインしているuserのid
+            @book.user_id = current_user.id
+
+            #データベースへの保存を行い遷移するページを指定
+            #bookをデータベースに保存し、saveが成功
+            if @book.save 
+                flash[:success] ="書籍情報が正しく登録されました"
+                redirect_to new_book_path
+            #saveが失敗
+            else
+                flash[:danger] ="正常に登録されませんでした"
+                redirect_to new_book_path
+            end
         end
     end
 
@@ -56,6 +63,7 @@ class BooksController < ApplicationController
             @books = Book.first(0)
         else
             #部分検索
+            @keyword = params[:search]
             @books = Book.where("content LIKE ? ",'%' + params[:search] + '%')
         end
     end
