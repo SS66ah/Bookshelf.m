@@ -23,18 +23,21 @@ class BooksController < ApplicationController
 
     #新規登録
     def create
-        if not
-            Book.where(isbn: "#{params[:isbn]}").count >= 1
-            flash[:info] = "登録済みであるため登録できませんでした"
-            redirect_to new_book_path
-            return
-        else
             #bookレコードに投稿内容を格納
             @book = Book.new(book_params)
 
             #user_idカラムに投稿者のidを格納
             #取得したbookのレコードのuser_idカラム＝現在ログインしているuserのid
             @book.user_id = current_user.id
+
+            i= @book.isbn
+            if
+                Book.where(isbn:"#{i}").count >= 1
+                #binding.pry
+                flash[:info] = "登録済みであるため登録できませんでした"
+                redirect_to new_book_path
+                return
+            end
 
             #データベースへの保存を行い遷移するページを指定
             #bookをデータベースに保存し、saveが成功
@@ -46,7 +49,6 @@ class BooksController < ApplicationController
                 flash[:danger] ="正常に登録されませんでした"
                 redirect_to new_book_path
             end
-        end
     end
 
     #詳細
