@@ -31,7 +31,7 @@ class BooksController < ApplicationController
             @book.user_id = current_user.id
 
             @book.isbn = @book.isbn.gsub(/-/, '')
-            binding.pry
+            #binding.pry
             if
                 Book.where(isbn:"#{@book.isbn}").count >= 1
                 #binding.pry
