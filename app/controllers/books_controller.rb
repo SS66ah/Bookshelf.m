@@ -30,9 +30,10 @@ class BooksController < ApplicationController
             #取得したbookのレコードのuser_idカラム＝現在ログインしているuserのid
             @book.user_id = current_user.id
 
-            i= @book.isbn
+            @book.isbn = @book.isbn.gsub(/-/, '')
+            binding.pry
             if
-                Book.where(isbn:"#{i}").count >= 1
+                Book.where(isbn:"#{@book.isbn}").count >= 1
                 #binding.pry
                 flash[:info] = "登録済みであるため登録できませんでした"
                 redirect_to new_book_path
